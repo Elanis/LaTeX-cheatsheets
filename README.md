@@ -2,7 +2,7 @@
 
 This repository was made to make short pdf to recap some of my college courses. They're available in LaTeX format and in PDF format.
 
-**Warning:** Some of this file are in english, some in french, please refer to file path.
+**Warning:** Some of this file are in english, some in french, please refer to file name.
 
 # Contribute
 
