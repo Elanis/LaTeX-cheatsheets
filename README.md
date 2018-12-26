@@ -1,4 +1,4 @@
-# Studies cheatsheet
+# LaTeX cheatsheets
 
 This repository was made to make short pdf to recap some of my college courses. They're available in LaTeX format and in PDF format.
 
