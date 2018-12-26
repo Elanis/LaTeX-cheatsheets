@@ -8,7 +8,7 @@ function compile2pdf() {
 				compile2pdf $i
 			fi			
 		elif [ ${i: -4} == ".tex" ]; then
-			newFile="$(echo $i | sed -e "s/src/docs/g" | sed -e "s/tex/pdf/g")"
+			newFile="$(echo $i | sed -e "s/src/docs/g" | sed -e "s/\.tex/\.pdf/g")"
 
 			if [ ! -d "$(echo $1 | sed -e "s/src/docs/g")" ]; then
 				mkdir -p "$(echo $1 | sed -e "s/src/docs/g")"
