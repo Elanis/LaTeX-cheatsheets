@@ -1,0 +1,112 @@
+\documentclass[a4paper, 12pt, french]{article}
+\usepackage[utf8]{inputenc} %encodage
+\usepackage[T1]{fontenc} %taille de fonte
+\usepackage{babel} %Facilitation du francais
+\usepackage{amsmath}
+
+\title{Memo LaTeX}
+\author{Elanis - https://github.com/Elanis/studies-cheatsheet}
+
+\begin{document}
+	\maketitle
+
+	Utilisation de \emph{l'emphase}.
+
+	\section{Listes}
+
+	\begin{itemize}
+		\item Premier
+		\item Second
+
+		Second paragraphe du second
+	\end{itemize}
+
+	\begin{enumerate}
+		\item Premier
+		\item Second
+	\end{enumerate}
+
+	\begin{description}
+		\item[Premier] choix
+		\item[Second] choix
+	\end{description}
+
+	\section{Notes}
+	\label{sec:notes}
+
+	Pour faire des notes, nous pouvons utiliser plusieurs commandes. L’une d’elle permet 
+	d’avoir des notes de marges, les deux autres des notes de bas de page.
+
+	Ceci est un document avec une note de bas de page ici\footnote{voici la note}.
+
+	Ceci est un document avec une note dans la marge \marginpar{voici la note}.
+
+	\section{Les références}
+	Dans ce document, nous avons parlé des notes dans la section \ref{sec:notes} qui est à 
+	la page \pageref{sec:notes}.
+
+	\section{Maths}
+
+	\subsection{inline}
+
+		test de maths \no 1(le plus utilisé) $f(x) = 2x$
+
+		test de maths \no 2 \(f(x) = 2x\)
+
+		test de maths \no 3 \begin{math} f(x) = 2x \end{math}
+
+	\subsection{block}
+
+		Premier (le plus utilisé)
+		\[
+			f(x) = 2x
+		\]
+
+		Second
+		\begin{displaymath}
+			f(x) = 2x
+		\end{displaymath}
+
+	\subsection{notations}
+		$2^2$
+		$2_2$
+
+		$2^{10}$
+		$2_{50}$
+
+		$O^8_{450}$
+
+		$\frac{12}{34}$
+
+		$\sqrt{2}$
+
+		$cos(x)$ %probleme
+		$\cos(x)$ %solution
+
+		$\sin(x)$
+		$\sinh(x)$
+		etc.
+
+		\[
+			\sum_{k = 0}^{n} k = \frac{n(n+1)}{2}
+		\]
+
+		\[
+			\lim_{x \to \infty} f(x) = \ell
+		\]
+
+		%necessite amsmath
+		\[
+			\binom{n}{k} \text{ est le nombre de parties $k$ dans un ensemble à $n$ elements}
+		\]
+
+		\[ %probleme
+			( \frac{1}{2} )
+		\]
+
+		\[ %solution
+			\left( \frac{1}{2} \right)
+		\]
+
+
+\end{document}
