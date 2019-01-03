@@ -39,6 +39,7 @@
 %Metas
 \title{Java OO}
 \author{Elanis - https://github.com/Elanis/LaTeX-cheatsheets}
+\date{}
 
 \begin{document}
 	\maketitle
@@ -57,6 +58,8 @@
 	\subsection{Bases}
 
 	\begin{lstlisting}
+	package test;
+
 	public class Hello {
 		private int x;
 
@@ -69,6 +72,16 @@
 		public int getX() { return x; }
 		public void setX(x) { this.x = x; }
 	}
+
+	// ... (autre fichier)
+
+	import packageFolder.test;
+	// ...
+	variable = new Hello();
+
+	// ... (autre fichier)
+
+	variable = new packageFolder.test.Hello()
 	\end{lstlisting}
 
 	Portées disponibles:
@@ -235,7 +248,7 @@
 
 	\subsection{Interfaces}
 
-	Une interface est une classe où toutes, les methodes sont abstraites. Les methodes et lest attributes peuvent tout de même être \emph{static} ou \emph{final}. Une classe peut implementer plusieurs interfaces contrairement à l'heritage. Il faut utiliser le mot clé \emph{implements} afin d'implementer une interface.
+	Une interface est une classe où toutes, les methodes sont abstraites. Les methodes et les attributs peuvent tout de même être \emph{static} ou \emph{final}. Une classe peut implementer plusieurs interfaces contrairement à l'heritage. Il faut utiliser le mot clé \emph{implements} afin d'implementer une interface.
 
 	\begin{lstlisting}
 	interface Colored {
