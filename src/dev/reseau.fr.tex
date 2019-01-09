@@ -50,7 +50,7 @@
 
 	« Un réseau est un ensemble d'équipement reliés entre eux et qui échangent des informations »
 
-	\subsection{Echanges sur de longues distances}
+	\subsection{Échanges sur de longues distances}
 	\begin{itemize}
 		\item Satellite
 		\item Hertzien (TV)
@@ -61,7 +61,7 @@
 		\item ...
 	\end{itemize}
 
-	\subsection{Echanges sur de courtes/moyennes distances}
+	\subsection{Échanges sur de courtes/moyennes distances}
 	\begin{itemize}
 		\item CPL (Courant porteur de ligne): Passage du signal par le réseau éléctrique
 		\item NFC (Sans contact): Telephones, Cartes bancaires, Badges, etc
@@ -103,7 +103,7 @@
 
 	\includegraphics[width=13.8cm]{reseau_niveaux_de_service}
 
-	\section{Physique}
+	\section{Couche Physique}
 
 	\emph{Bande passante:} Taille de la bande de frequence utilisée pour transmettre des données
 
@@ -223,7 +223,7 @@
 
 	\includegraphics[width=13.8cm]{reseau_diagramme_spatial}
 
-	\section{Liaison}
+	\section{Couche Liaison}
 
 	Le but de la couche liaison est de transporter les trames d'un nœud à un autre de manère fiable.\\
 
@@ -307,7 +307,7 @@
 
 	\subsubsection{Protocoles ALOHA à allocation temporelle}
 
-	Le temps est divisé en intervalles egaux pour tous, où transmettre une trame. Les nœuds sont synchronisés temporellement.
+	Le temps est divisé en intervalles egaux pour tous, où transmettre une trame. Les nœuds sont synchronisés temporellement.\\
 
 	\emph{Deroulement:}
 	\begin{itemize}
@@ -324,7 +324,7 @@
 
 	\subsubsection{Protocoles ALOHA pur}
 
-	Il n'y a plus de synchronisation du temps, le nœud transmet la trame dès qu'il la recoit des couches supérieures.
+	Il n'y a plus de synchronisation du temps, le nœud transmet la trame dès qu'il la recoit des couches supérieures.\\
 
 	\emph{Deroulement:}
 	\begin{itemize}
@@ -346,7 +346,8 @@
 			\item si il n'y a pas de trame qui transite, on envoie la trame
 			\item si il y a une trame, on attend un temps aléatoire avant d'écouter à nouveau
 		\end{itemize}
-	\end{itemize}
+	\end{itemize}\mbox{}\\
+
 	Si une fois qu'on a commencé à émettre, on détecte une collision, on arrête de transmettre et on attend un temps aléatoire.
 
 	\subsubsection{Protocoles à partage de ressources}
@@ -355,7 +356,7 @@
 	\begin{itemize}
 		\item si un seul nœud actif, lui donner tout le débit (\emph{R} bits/s)
 		\item si \emph{M} nœuds actifs, leur assurer un débit moyen de \emph{R/M} bits/s
-	\end{itemize}
+	\end{itemize}\mbox{}\\
 
 	ALOHA ET CSMA possèdent la première propriété mais pas la secondent. De plus, les latences de temps introduisent des intervalles ou rien ne transite, et donc une perte de débit.
 
@@ -367,7 +368,7 @@
 		\item le maître sonde le \emph{i} ème nœud et lui indique qu'il peut transmettre jusqu'à \emph{p} trames
 		\item Si le nœud a des trames à transmettre, il le fait, pendant que le nœud maître attende
 		\item Une fois terminé, le maître passe au \emph{i+1} ème nœud
-	\end{itemize}
+	\end{itemize}\mbox{}\\
 
 	\emph{Avantages:} Pas de collisions, pas de temps d'inactivité dans le reseau
 	\emph{Désavantages:} Un delai de sondage (s'il n'y a qu'un seul nœud actif, le nœud maitre les sondes quand même tous) et si le maitre tombe en panne, il n'y a plus de transmissions.
@@ -386,9 +387,10 @@
 			\item s'il lui reste des trames, il attend le prochain passage du jeton
 		\end{itemize}
 		\item sinon il envoie directement le jeton à son voisin
-	\end{itemize}
+	\end{itemize}\mbox{}\\
 
 	\emph{Avantages:} Très efficace
+
 	\emph{Désavantages:} Si un nœud tombe en panne, le jeton ne transite plus. Si un nœud "oublie" de remettre le jeton sur le lien, la transmissions s'arrête. Un nouveau jeton doit être régénéré.
 
 	\subsection{Classifications de réseaux}
@@ -472,7 +474,7 @@
 
 	\subsection{Materiels réseaux}
 
-	Dans un reseau il existe de nombreux éléments, qui sont soit terminaux (les noeuds) ou de connexions (repeater, hub, bridge, switch, etc).
+	Dans un reseau il existe de nombreux éléments, qui sont soit terminaux (les nœuds) ou de connexions (repeater, hub, bridge, switch, etc).
 
 	\subsubsection{Les hubs (concentrateurs)}
 
@@ -499,7 +501,7 @@
 
 	\subsubsection{Fonctionnement}
 
-	Service avec connexion: RTS (Request to send), CTS (Clear to send), ACK (acknowledge). Il n'y a pas de collisions car les trames contiennent la durée de transmissions, de plus le CTS est recu par tout les noeuds qui sont donc au courant de la transmission.
+	Service avec connexion: RTS (Request to send), CTS (Clear to send), ACK (acknowledge). Il n'y a pas de collisions car les trames contiennent la durée de transmissions, de plus le CTS est recu par tout les nœuds qui sont donc au courant de la transmission.
 
 	\subsection{Autres protocoles de la couche liaison}
 
@@ -511,4 +513,134 @@
 		\item[Relais de trames (amélioration de X.25)] Utilisé par des entreprises comme alternative à Internet, Commutation de paquets sur circuits virtuels
 		\item{Etc.}
 	\end{description}
+
+	\section{Couche Réseau}
+
+	Le but de la couche réseau est d'assurer la transmission entre un nœud source et une nœud destination à travers les différents routeurs. Elle offre deux fonctions:
+
+	\begin{itemize}
+		\item Routage : le choix de l'itinéraire à emprunter. Fait par des algorithmes de routage
+		\item Réexpédition : la transmission d'un paquet entrant vers une liaison sortante
+	\end{itemize}
+
+	\subsection{Généralités}
+
+	\begin{description}
+		\item[Sur le nœud source] La couche réseau récupère des messages de la couche transport, pour chaque message, elle construit un (ou plusieurs) paquet(s), la couche réseau envoie chaque paquet à la couche liaison.
+		\item[Sur chaque nœud intermédiaire (routeur)] La couche réseau récupère les paquets de la couche liaison, pour chacun d’entre eux, elle construit un nouveau paquet, la couche réseau envoie chaque paquet à la couche liaison.
+		\item[Sur le nœud destination] La couche réseau récupère des paquets de la couche liaison, elle extrait les données de chaque paquet et les envoie à la couche transport.
+	\end{description}
+
+	Au niveau de la couche reseau, il existe deux modes de communication: le modèle avec connexion (plutôt utilisé par les opérateurs de réseaux), le modèle sans connexion (plutôt le choix de la communauté internet).
+
+	\subsubsection{Modèle orienté connexion (circuit victuel)}
+
+	On peut faire l'analogie avec les circuits physiques téléphoniques, cette connexion doit être établie avant tout envoie, et la route est calculée à chaque connexion. Enfin, chaque paquet comprends la référence du circuit virtuel (ce qui explique comment la facturation finale est étabile). Ce modèle est plus efficace car ne nécessite pas de recalcul de la route à chaque paquet.
+
+	\subsubsection{Modèle sans connexion (datagramme)}
+
+	Les paquets sont transportés de facon indépendante et sont appelés \emph{datagrammes} (par analogie au télégramme), ils comprennent l'adresse de destination et nécessitent un système d'addressage. Ce modèle est plus souple car permet à chaque paquet d'emprunter le meilleur chemin, ce qui est interessant en cas de congestion ou de panne.
+
+	\subsection{Routage}
+
+	Le routage est utilisé uniquement en mode sans connexion. Il consiste à calculer la meilleur route pour chaque paquet. Les équipements utilisés pour effectuer le routage sont les \emph{routeurs}. Le meilleur chemin est celui qui passe par les liens les moins onéreux en terme de longueur, débit, côut, etc.
+
+	Le but d'un algothime de routage est de trouver la meilleur route pour un paquet. Cet algorithme doit être exact, simple, robuste (adapté aux pannes), stable (convergence vers un état equilibré), juste (vis à vis de tout les usagers), optimal. Il existe deux classes d'algorithmes de routage:
+
+	\begin{description}
+		\item[Algorithmes de routage global] Calculer en se basant sur une information globale (le graphe entier)
+		\item[Algorithmes de routage décentralisés] Calculer en se basant sur des informations locales: pas de connaissance globale du graphe, chaque nœud connaît les coût vers ses voisins auxquels il est directement connecté, les nœuds échangent donc les informations avec leurs voisins.
+		\item[Dans les deux cas, l'algorithme peut être:]
+		\begin{itemize}
+			\item Statique: les parcours changent très peu et quasiment uniquement après intervention humaine
+			\item Dynamiques: les parcours s'adaptent automatiquement aux changements de topologie
+		\end{itemize}
+	\end{description}
+
+	\subsubsection{Algorithme par états de lien (Dijkstra)}
+
+	Le graphe complet est connu de tous, tous les nœuds ont la même information. Le principe est de calculer le meilleur chemin de tous les noeuds à tout les autres avec l'algorithme de Dijkstra.
+
+	\paragraph{Algorithme de Dijkstra}\mbox{}\\
+
+	\emph{Notations:}
+	\begin{description}
+		\item[c(i, j)] du lien entre i et j
+		\item[D(v)] coût courant du chemin de la source à v
+		\item[P(v)] nœud précédant v dans le chemin de la source à v
+		\item[N] ensemble des nœuds dont on connaît le coût minimal
+		\item[Adj(i, j )] vrai si i et j sont adjacents
+	\end{description}
+
+	\begin{lstlisting}
+	Dijkstra (entree: noeud x, graphe G) sortie t(x)
+
+	N = {x} //N ensemble de noeuds
+	Pour tout (noeud y dans G)
+		Si Adj(x,y)= vrai Alors
+			D(y) = c(x,y)
+			P(y) = x
+		Sinon 
+			D(y) = +inf
+		Fsi
+	Fpour
+
+	Repeter
+		Trouver z qui n appartient pas N tel que D(z) est minimal
+		N = N union {z} //Ajouter z a N
+
+		pour tout (noeud y dans N et Adj(w,y) = vrai)
+			D(y) = min( D(y), D(z) + c(z,y) )
+			P(y) = z
+		fpour
+	Jusqu a ce que tous les noeuds soient dans N
+	\end{lstlisting}
+
+	\subsubsection{Algorithme à vecteur distance}
+
+	Chaque routeur dispose d'une information locale precisant pour chaque destination connue le meilleur chemin. Le principe est que des informations partielles soient échangées régulièrement entre les routeurs afinde mettre à jour leurs connaissances via des échanges de vecteur. Chaque vecteur associe une destination à son coût estimé.
+
+	\paragraph{Algorithme RIP}\mbox{}\\
+
+	\begin{lstlisting}
+	RIP (in:vecteur v, in:routeur R, in/out:table T )
+
+	pour chaque ligne (d,c) de v
+		si d n appartient pas a T alors
+			ajouter a T (d, c+1, R)
+		sinon //deja dans T comme (d,cactuel,lactuel)
+
+			si R = lactuel alors
+				mettre a jour T avec (d, c+1, R)
+			sinon // R different de lactuel
+				si c+1 < cactuel alors
+					remplacer dans T avec (d, c+1, R)
+				finsi
+			finsi
+		finsi
+	fpour
+	\end{lstlisting}
+
+	\emph{Remarques:}
+	\begin{description}
+		\item[Nœuds terminaux] Les stations de travail ne diffusent pas, seuls les routeurs le font
+		\item[A l'initialisation des routeurs] Les tables de routage sont initialisées avec l'ensemble des adresses des réseaux auxquels le routeur est directement connecté, le coût minimum (égal à  1) est alors associé à ces adresses destinations
+		\item[Ne tient pas compte du coût réel] Utilise le nombre de sauts (coût de 1)
+	\end{description}
+
+	\subsubsection{Routage Hierarchique}
+
+	Internet contient plusieurs milliers de routeur, il est donc impossible d'échanger et de mettre à jour les tables de routage. On a donc recourt à un routage hierarchique: il s'agit zones autonomes reliées par des FAI de plus haut niveau où il y a un routage interne et un routage externe séparés.
+
+	\subsection{Autres algorithmes de routage}
+
+	Tous ces réseaux définissent une structure de trame ainsi que des protocoles d'accès au canal et toutes les fonctionnalités de la couche liaison.\\
+
+	\begin{description}
+		\item[Autres classes d'algorithmes de routage] Algorithmes d'états de liens optimisés (notamment utilisé dans le ad-hoc), ou les algorithmes à vecteurs de chemins
+		\item[OSPF (Open Shortest Path First)] Un algorithme derivé de Dijkstra
+		\item[BGP (Border Gateway Protocol)] Algorithme à vecteur de chemin pour le routage entre les zones autonomes
+		\item{Etc.}
+	\end{description}
+
 \end{document}
