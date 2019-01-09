@@ -37,7 +37,7 @@
 \newcommand{\hr}{\noindent\rule{13.7cm}{0.4pt}}
 
 %Metas
-\title{Reseau}
+\title{Réseau}
 \author{Elanis - https://github.com/Elanis/LaTeX-cheatsheets}
 \date{}
 
@@ -63,7 +63,7 @@
 
 	\subsection{Echanges sur de courtes/moyennes distances}
 	\begin{itemize}
-		\item CPL (Courant porteur de ligne): Passage du signal par le reseau éléctrique
+		\item CPL (Courant porteur de ligne): Passage du signal par le réseau éléctrique
 		\item NFC (Sans contact): Telephones, Cartes bancaires, Badges, etc
 		\item Radio: Bluetooth, WiFi, etc
 		\item Femtocell: mini-relai telephonique
@@ -89,7 +89,7 @@
 
 	\subsection{Le Cloud}
 
-	Le but du cloud esst de "dématerialiser" les systèmes informatiques en les envoyant sur le Web. Il en résulte des problèmes sur le reseau avec tout ce nouveau traffic qui auparavant était local aux reseaux d'entreprise le plus souvent. Il exite néanmoins des solutions:
+	Le but du cloud est de "dématerialiser" les systèmes informatiques en les envoyant sur le Web. Il en résulte des problèmes sur le réseau avec tout ce nouveau traffic qui auparavant était local aux réseaux d'entreprise le plus souvent. Il exite néanmoins des solutions:
 
 	\subsubsection{Le Edge Computing}
 
@@ -117,7 +117,7 @@
 		\item[Paire torsadée:] dans un même câble par 2, 4 ou 8 fils; une paire est un lien de communication. Chaque paire est enroulée pour limiter les interferences. \emph{Debit Max: 100 Gbps}. Simple, economique, reutilisable, mais sensible aux pertubations électromagnetiques et grande atténuation.
 		\item[Coaxial:] il consiste en deux conducteurs ayant le même axe. \emph{Debit Max: 2 Gbps} Tres bonne qualité, haut debit, bonne manipulation mais très cher.
 		\item[Fibre optique:] Cylindre de fibre de sillicium extremement fin. \emph{Debit Max: plusieurs terabits par seconde} Bande passante immense, debits très importants, insensibles aux interferences et corrosions chimiques, attenuation faible, leger mais fragile, unidirectionnel, transmission point à point, cout élevé des interfaces.
-		\item[Ondes radio:] Wifi (56Mbps), Bluetooth (2Mbps), Infrarouge, Hertzien, etc \emph{Portée jusqu'a quelques centaines de mêtres}
+		\item[Ondes radio:] Wifi (56Mbps), Bluetooth (2Mbps), Infrarouge, Hertzien, etc \emph{Portée jusqu'a quelques centaines de mètres}
 		\item[Micro ondes:] Transmission terrestre de 50 à 1000km et satellitaire a 36000km (geostationnaire) ou 800 km d'altitude
 	\end{description}
 
@@ -184,7 +184,7 @@
 
 	\subsection{Transmission modulée}
 
-	Le principal problème de la transmission en bande de base est que le signal se degrade sur la distance, il est donc utilisé uniquement sur des reseaux locaux. On utilise donc pour de plus grandes distances des signaux sinuisoidaux générés et recupérés par des modems (modulateur - demodulateur).
+	Le principal problème de la transmission en bande de base est que le signal se degrade sur la distance, il est donc utilisé uniquement sur des réseaux locaux. On utilise donc pour de plus grandes distances des signaux sinuisoidaux générés et recupérés par des modems (modulateur - demodulateur).
 
 	Afin d'y introduire de l'information, les modulations permettent de transformer:
 	\begin{itemize}
@@ -225,7 +225,7 @@
 
 	\section{Liaison}
 
-	Le but de la couche liaison est de transporter les trames d'un noeud à un autre de manère fiable.\\
+	Le but de la couche liaison est de transporter les trames d'un nœud à un autre de manère fiable.\\
 
 	\emph{DCE: } Detection et correction d'erreur
 
@@ -293,21 +293,21 @@
 
 	\subsection{Protocoles d'accès au canal}
 
-	Il existe deux types de liens: point à point (deux noeuds se partagent un canal), ou diffusion (canal partagé par plusieurs noeuds). Sur un canal partagé, les noeuds qui transmettent des trames en même temps, ce qui peut engender des \emph{collisions}. Ces collisions brouillent les trames les rendant illisibles.
+	Il existe deux types de liens: point à point (deux nœuds se partagent un canal), ou diffusion (canal partagé par plusieurs nœuds). Sur un canal partagé, les nœuds qui transmettent des trames en même temps, ce qui peut engender des \emph{collisions}. Ces collisions brouillent les trames les rendant illisibles.
 
 	\subsubsection{Protocoles à partionnement du canal}
 
-	Il s'agit de diviser la bande passante et/ou le temps de parole equitablement pour chaque noeud.
+	Il s'agit de diviser la bande passante et/ou le temps de parole equitablement pour chaque nœud.
 
 	\includegraphics[width=13.8cm]{reseau_partitionnement_canal}
 
 	\subsubsection{Protocoles à accès aléatoires}
 
-	Tout les noeuds profitent de tout le débit et transmettent quand ils le desirent. S'il detectent une collision, il retransmettent après un temps aléatoire. Le processus est réitéré jusqu'a ce que la trame soit transmise.
+	Tout les nœuds profitent de tout le débit et transmettent quand ils le desirent. S'il detectent une collision, il retransmettent après un temps aléatoire. Le processus est réitéré jusqu'a ce que la trame soit transmise.
 
 	\subsubsection{Protocoles ALOHA à allocation temporelle}
 
-	Le temps est divisé en intervalles egaux pour tous, où transmettre une trame. Les noeuds sont synchronisés temporellement.
+	Le temps est divisé en intervalles egaux pour tous, où transmettre une trame. Les nœuds sont synchronisés temporellement.
 
 	\emph{Deroulement:}
 	\begin{itemize}
@@ -324,7 +324,7 @@
 
 	\subsubsection{Protocoles ALOHA pur}
 
-	Il n'y a plus de synchronisation du temps, le noeud transmet la trame dès qu'il la recoit des couches supérieures.
+	Il n'y a plus de synchronisation du temps, le nœud transmet la trame dès qu'il la recoit des couches supérieures.
 
 	\emph{Deroulement:}
 	\begin{itemize}
@@ -370,11 +370,11 @@
 	\end{itemize}
 
 	\emph{Avantages:} Pas de collisions, pas de temps d'inactivité dans le reseau
-	\emph{Désavantages:} Un delai de sondage (s'il n'y a qu'un seul noeud actif, le noeud maitre les sondes quand même tous) et si le maitre tombe en panne, il n'y a plus de transmissions.
+	\emph{Désavantages:} Un delai de sondage (s'il n'y a qu'un seul nœud actif, le nœud maitre les sondes quand même tous) et si le maitre tombe en panne, il n'y a plus de transmissions.
 
 	\subsubsection{Protocole à passage de jetons}
 
-	Un nœud attend d'avoir le jeton pour transmettre. Le jeton est un signal (chaîne de bits) particulier qui passe entre les noeuds.
+	Un nœud attend d'avoir le jeton pour transmettre. Le jeton est un signal (chaîne de bits) particulier qui passe entre les nœuds.
 
 	\emph{Deroulement:}
 	\begin{itemize}
