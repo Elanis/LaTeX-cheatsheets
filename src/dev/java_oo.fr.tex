@@ -381,7 +381,7 @@
 	personnes.put(123456, "test");
 	personnes.put(321654, "test2");
 
-	for(Ineger cle : personnes.keySet()) {
+	for(Integer cle : personnes.keySet()) {
 		System.out.println(cle + " -> " + personnes.get(cle));
 	}
 	\end{lstlisting}
@@ -392,7 +392,7 @@
 
 	\begin{lstlisting}
 	// Par type de parametre
-	public void drawAll(HashSet<? extends Shape) shapes) { // ... }
+	public void drawAll(HashSet<? extends Shape> shapes) { // ... }
 	class Groupe<P> { }
 
 	// On peut aussi contraindre les types
