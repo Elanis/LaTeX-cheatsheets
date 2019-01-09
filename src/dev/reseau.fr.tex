@@ -222,4 +222,173 @@
 	Les transmissions modulées peuvent combiner plusieurs formes de modulations simultanées. On représente ces modulations par un diagramme spatial:
 
 	\includegraphics[width=13.8cm]{reseau_diagramme_spatial}
+
+	\section{Liaison}
+
+	Le but de la couche liaison est de transporter les trames d'un noeud à un autre de manère fiable.\\
+
+	\emph{DCE: } Detection et correction d'erreur
+
+	La couche liaison offre 2 fonctions:
+	\begin{itemize}
+		\item Detection et correction d'erreurs
+		\begin{itemize}
+			\item Bits de parités
+			\item Code Cyclique
+		\end{itemize}
+		\item Protocoles d'accès au canal
+		\begin{itemize}
+			\item Protocoles à partitionnement du canal
+			\item Protocoles aléatoires
+			\item Protocoles à partage de ressources
+		\end{itemize}
+	\end{itemize}
+
+	Les services de la couche liaison sont:
+	\begin{description}
+		\item[Encapsulation] incorporer les données de la couche supérieur (réseau) dans une trame
+		\item[Accès au médium] protocole d'accès au canal de communication
+		\item[Détection / Correction d'erreurs] mécanismes de détection / correction d'erreurs de transmission
+		\item[Transmission fiable] service d'acquittement et de retransmission pour certains liens peu fiables (ex. sans fil)
+		\item[Contrôle de flux] éviter les surcharges si trop de trames arrivent trop vite sur un nœud
+	\end{description}
+
+	Cette couche est souvent impantée sur la carte réseau et est autonome.
+
+	\subsection{Detection et correction d'erreur}
+
+	\subsubsection{Bits de parités}
+
+	Ajouter aux données un bit DCE afin de fixer la parité de la trame (Fixer le nombre de 1 dans la trame: pair ou impair).
+
+	\emph{Limitations:} Le nombre d'erreurs detectable est au maximum de 1, en effet, s'il y'a 2 erreurs, la parité s'annule.
+
+	\subsubsection{Bits de parités bidimensionneles}
+
+	Le principe est le même que le précédent, sauf que les bits de parités sont insérés en ligne et en colonne.
+
+	\emph{Limitations:} Permet de detecter et corriger une erreur, de detecter 2 erreurs sans pouvoir forcement les corriger.
+
+	\emph{Note:} Ce même principe est utilisé dans les lecteurs CD audio
+
+	\subsubsection{Codes cycliques CRC}
+
+	\emph{Principe:}
+	\begin{itemize}
+		\item On désire envoyer une trame \emph{D} de \emph{d} bits, à laquelle on ajout un DCE \emph{R} de \emph{r} bits
+		\item Les deux cotés se mettend d'accord sur une suite de \emph{r+1} buts qu'on appellera \emph{G} pour générateur
+		\item L'émetteur envoie le message qui contient \emph{(D, R) (d + r bits)} de telle sorte que le message soit divisible par \emph{G}.
+	\end{itemize}
+
+	\emph{Verification:} Le récepteur recoit le message, le divise par \emph{G}, et si il reste 0 il n'y a pas d'erreur.\\
+
+	\includegraphics[width=8cm]{reseau_crc_principe}
+
+	\emph{Remarques:}
+	\begin{itemize}
+		\item En ajoutant \emph{R} à \emph{D}, on crée un message divisible par \emph{G}, c'est pour cela que \emph{R} est le reste de la division.
+		\item Les CRC sont normalisés selon la taille de leur générateur. Exemple: CRC-32 a un générateur de 32 bits
+		\item Chaque CRC peut detecter des erreurs de largeur \emph{r} bits ou moins.
+	\end{itemize}
+
+	\subsection{Protocoles d'accès au canal}
+
+	Il existe deux types de liens: point à point (deux noeuds se partagent un canal), ou diffusion (canal partagé par plusieurs noeuds). Sur un canal partagé, les noeuds qui transmettent des trames en même temps, ce qui peut engender des \emph{collisions}. Ces collisions brouillent les trames les rendant illisibles.
+
+	\subsubsection{Protocoles à partionnement du canal}
+
+	Il s'agit de diviser la bande passante et/ou le temps de parole equitablement pour chaque noeud.
+
+	\includegraphics[width=13.8cm]{reseau_partitionnement_canal}
+
+	\subsubsection{Protocoles à accès aléatoires}
+
+	Tout les noeuds profitent de tout le débit et transmettent quand ils le desirent. S'il detectent une collision, il retransmettent après un temps aléatoire. Le processus est réitéré jusqu'a ce que la trame soit transmise.
+
+	\subsubsection{Protocoles ALOHA à allocation temporelle}
+
+	Le temps est divisé en intervalles egaux pour tous, où transmettre une trame. Les noeuds sont synchronisés temporellement.
+
+	\emph{Deroulement:}
+	\begin{itemize}
+		\item Attendre le début du prochain intervalle pour transmettre une trame
+		\item Si pas de collisions, on passe à la trame suivante (puis revenir au début)
+		\item Si il y a eu collision
+		\begin{itemize}
+			\item avec probabilité p on retransmet la trame (puis revenir au début)
+			\item avec probabilité (1-p) on laisse passer l'intervalle (puis revenir au début)
+		\end{itemize}
+	\end{itemize}
+
+	\includegraphics[width=13.8cm]{reseau_aloha}
+
+	\subsubsection{Protocoles ALOHA pur}
+
+	Il n'y a plus de synchronisation du temps, le noeud transmet la trame dès qu'il la recoit des couches supérieures.
+
+	\emph{Deroulement:}
+	\begin{itemize}
+		\item S'il n'y a pas de collision, on passe à la trame suivante
+		\item Si il y a eu collision
+		\begin{itemize}
+			\item avec probabilité p on retransmet la trame
+			\item avec probabilité (1-p) attendre un moment (le temps nécessaire pour transmettre une trame)
+			\item revenir à 1
+		\end{itemize}
+	\end{itemize}
+
+	\subsubsection{Protocole CSMA/CD - Carrier Sense Multiple Access with Collision Detection}
+
+	\emph{Deroulement:}
+	\begin{itemize}
+		\item On écoute le canal
+		\begin{itemize}
+			\item si il n'y a pas de trame qui transite, on envoie la trame
+			\item si il y a une trame, on attend un temps aléatoire avant d'écouter à nouveau
+		\end{itemize}
+	\end{itemize}
+	Si une fois qu'on a commencé à émettre, on détecte une collision, on arrête de transmettre et on attend un temps aléatoire.
+
+	\subsubsection{Protocoles à partage de ressources}
+
+	\emph{Deux propriétés désirables pour un protocole d'accès:}
+	\begin{itemize}
+		\item si un seul nœud actif, lui donner tout le débit (\emph{R} bits/s)
+		\item si \emph{M} nœuds actifs, leur assurer un débit moyen de \emph{R/M} bits/s
+	\end{itemize}
+
+	ALOHA ET CSMA possèdent la première propriété mais pas la secondent. De plus, les latences de temps introduisent des intervalles ou rien ne transite, et donc une perte de débit.
+
+	\subsubsection{Protocole à sondages}
+
+	Un nœud maitre sont les autres nœuds à tour de rôle afin de leur indiquer qu'il peuvent transmettre.
+	\emph{Deroulement:}
+	\begin{itemize}
+		\item le maître sonde le \emph{i} ème nœud et lui indique qu'il peut transmettre jusqu'à \emph{p} trames
+		\item Si le nœud a des trames à transmettre, il le fait, pendant que le nœud maître attende
+		\item Une fois terminé, le maître passe au \emph{i+1} ème nœud
+	\end{itemize}
+
+	\emph{Avantages:} Pas de collisions, pas de temps d'inactivité dans le reseau
+	\emph{Désavantages:} Un delai de sondage (s'il n'y a qu'un seul noeud actif, le noeud maitre les sondes quand même tous) et si le maitre tombe en panne, il n'y a plus de transmissions.
+
+	\subsubsection{Protocole à passage de jetons}
+
+	Un nœud attend d'avoir le jeton pour transmettre. Le jeton est un signal (chaîne de bits) particulier qui passe entre les noeuds.
+
+	\emph{Deroulement:}
+	\begin{itemize}
+		\item Un nœud prend le jeton du canal
+		\item s'il a des trames à transmettre
+		\begin{itemize}
+			\item il peut en envoyer un nombre maximum
+			\item il remet le jeton sur le canal et le transmet au nœud voisin
+			\item s'il lui reste des trames, il attend le prochain passage du jeton
+		\end{itemize}
+		\item sinon il envoie directement le jeton à son voisin
+	\end{itemize}
+
+	\emph{Avantages:} Très efficace
+	\emph{Désavantages:} Si un nœud tombe en panne, le jeton ne transite plus. Si un nœud "oublie" de remettre le jeton sur le lien, la transmissions s'arrête. Un nouveau jeton doit être régénéré.
+
 \end{document}
