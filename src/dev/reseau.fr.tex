@@ -391,4 +391,124 @@
 	\emph{Avantages:} Très efficace
 	\emph{Désavantages:} Si un nœud tombe en panne, le jeton ne transite plus. Si un nœud "oublie" de remettre le jeton sur le lien, la transmissions s'arrête. Un nouveau jeton doit être régénéré.
 
+	\subsection{Classifications de réseaux}
+
+	\begin{description}
+		\item[WAN] \emph{wide area network} échelle d'un pays, ou planétaire - composé de plusieurs opérateurs
+		\item[MAN] \emph{metropolitan area network} échelle d'une ville ou d'une région - généralement un seul opérateur
+		\item[LAN] \emph{local area network} échelle d'une institution (entreprise, administration, école, ...) - généralement connecté à Internet à travers un routeur
+		\item[PAN] \emph{personal area network} échelle de quelques mètres
+	\end{description}
+
+	\subsection{Topologies de réseaux}
+
+	\includegraphics[width=13.8cm]{reseau_topologies}
+
+	\subsection{MAC (ou adresse physique)}
+
+	Adresse unique pour tout équipement, généralement 6 octets: les 3 premiers sont un code constructeur et les 3 derniers le numéro de série.
+
+	\emph{Exemples:} 00:22:15:50:55:4C, 00:30:48:81:66:3E
+
+	\emph{Remarque:} FF:FF:FF:FF:FF:FF est l'adresse de diffusion sur tous les nœuds
+
+	\subsection{Réseaux Ethernet}
+
+	C'est une technologie concue dans les 70 qui est maintenant majoritaire dans la conception de reseaux. Elle consiste en une spécification de la couche liaison et de la couche physique.\\
+
+	\emph{Propriétés:}
+	\begin{itemize}
+		\item permet d'avoir de gros débit (10Mbits/s jusqu'à 10Gbits/s)
+		\item peu onéreux et facile à mettre en place
+		\item utilisation de CSMA/CD (simple et décentralisé)
+		\item implemente des topologies en étoile où en bus
+		\item peut être utilisé sur des câbles coaxiaux, des paires torsadées, de la fibre optique, etc
+	\end{itemize}
+
+	\emph{Remarques:}
+	\begin{itemize}
+		\item il n'y a pas de "hadshake" (une fois envoyé, c'est oublié)
+		\item si le destinataire rejete la trame, l'envoyeur n'est pas notifié
+	\end{itemize}
+
+	\subsubsection{Trame Ethernet}
+
+	\includegraphics[width=13.8cm]{reseau_trame_ethernet}
+
+	\emph{Remarques sur la trame:}
+	\begin{itemize}
+		\item le préambule sert à réveiller le receveur et à synchroniser les horloges (recaler sur le même débit).
+		\item les deux derniers bits du préambule « 11 » indiquent le début des données.
+		\item le type est le protocole réseau utilisé par la couche supérieure
+		\item s'il y'a moins de 46 octets de données, on ajoute du bourrage pour les atteindre
+		\item le CRC utilisé est un CRC-32
+	\end{itemize}
+
+	\subsubsection{Spécification physique d'Ethernet}
+
+	La transmission est faite en \emph{bande de base}, en utilisant le \emph{Codage Manchester}. L'accès au médium se fait en CSMA/CD, plus il y'aura de collisions, plus on attendra.
+
+	\begin{description}
+		\item[10 BASE 2]
+		\begin{itemize}
+			\item 10 Mbit/s
+			\item câbles coaxial fin
+			\item topologie en bus, longueur maximale 185 m
+		\end{itemize}
+		\item[10 ou 100 BASE T]
+		\begin{itemize}
+			\item 10 ou 100 Mbit/s
+			\item câbles à UTP
+			\item Topologie en étoile, longueur d'un brin 100 mètres
+		\end{itemize}
+		\item[Ethernet Gbit ou 1000 BASE …]
+		\begin{itemize}
+			\item 1 ou 10 Gbit/s
+			\item Initialement fibre optique, maintenant des câbles UTP
+			\item Topologie en étoile, longueur d'un brin moins de 100 mètres
+		\end{itemize}
+		\item[100 Gbit/s] En développement
+	\end{description}
+
+	\subsection{Materiels réseaux}
+
+	Dans un reseau il existe de nombreux éléments, qui sont soit terminaux (les noeuds) ou de connexions (repeater, hub, bridge, switch, etc).
+
+	\subsubsection{Les hubs (concentrateurs)}
+
+	C'est une "multiprise" simple: il dispose de plusieurs interfaces de connexions, tous les signaux recus sont diffusés aux autres interfaces.
+
+	\subsubsection{Les switchs (commutateurs)}
+
+	Le switch ressemble beaucoup au hub si ce n'est qu'il envoie uniquement les données sur la bonne interface s'il sait ou se trouve la destination (via une table de commutation), ou par defaut - comme le hub - sur toutes les autres interfaces. La table de commutation est construite de manière itérative en fonction des découvertes du réseau faites par le commutateur.\\
+
+	\emph{Principe de la commutation-diffusion} Une trame arrive sur l'interface \emph{I} avec comme adresse de destination \emph{X}, le commutateur consulte sa table :
+	\begin{itemize}
+		\item Si \emph{X} est sur le même segment que \emph{I} -> Rejeter la trame (elle sera forcement reçu par \emph{X} )
+		\item Si le segment du nœud \emph{X} est connu -> Commutation vers l'interface du segment de \emph{X}
+		\item Sinon -> Diffusion sur toutes les interfaces sauf \emph{I} 
+	\end{itemize}
+
+	Il faut noter que la table de commutation est vidée après un certain temps afin d'être reactif aux changements de topologie.
+
+	\subsection{Liaisons sans fil}
+
+	\subsubsection{Trame sans fil}
+
+	\includegraphics[width=13.8cm]{reseau_trame_sans_fils}
+
+	\subsubsection{Fonctionnement}
+
+	Service avec connexion: RTS (Request to send), CTS (Clear to send), ACK (acknowledge). Il n'y a pas de collisions car les trames contiennent la durée de transmissions, de plus le CTS est recu par tout les noeuds qui sont donc au courant de la transmission.
+
+	\subsection{Autres protocoles de la couche liaison}
+
+	Tous ces réseaux définissent une structure de trame ainsi que des protocoles d'accès au canal et toutes les fonctionnalités de la couche liaison.\\
+
+	\begin{description}
+		\item[PPP (point to point protocol)] Protocoles pour liaisons point-à-point 
+		\item[ATM (asynchronous transfer mode)] Utilisé dans plusieurs réseaux fédérateurs d'Internet
+		\item[Relais de trames (amélioration de X.25)] Utilisé par des entreprises comme alternative à Internet, Commutation de paquets sur circuits virtuels
+		\item{Etc.}
+	\end{description}
 \end{document}
